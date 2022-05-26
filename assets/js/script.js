@@ -1,4 +1,7 @@
 // document id types: quiz-box, header, timer, quiz-card, quiz-question, button
+var quizCards = document.querySelector("#quiz-card")
+var quizQuestions = document.querySelector("#quiz-question")
+var quizButtons = document.querySelector("#button")
 
 // array of quiz objects - question, answers, correct answer
 let quizArray = [
@@ -24,3 +27,17 @@ let quizArray = [
     },
 ];
 console.log(quizArray);
+
+// function to start quiz
+let startQuiz = function() {
+    quizCards.remove()    
+}
+
+
+// start quiz button event listener
+document.getElementById("button").addEventListener("click", startQuiz);
+
+
+
+
+
