@@ -43,6 +43,10 @@ header a {
     color: var(--tertiary-color);
 }
 
+header a:hover {
+    color: var(--quaternary-color);
+}
+
 header p {
     font-size: 18px;
     color: var(--quaternary-color);
@@ -72,9 +76,13 @@ section p {
 
 .button {
     background-color: var(--secondary-color);
+    border: none;
     font-size: 18px;
     color: white;
     border-radius: 8px;
-    padding: 8px;
-    
+    padding: 10px;
+}
+
+.button:hover {
+    background-color: var(--primary-color);
 }
