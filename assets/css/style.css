@@ -86,3 +86,7 @@ section p {
 .button:hover {
     background-color: var(--primary-color);
 }
+
+.hide {
+    display: none;
+}
