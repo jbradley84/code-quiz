@@ -3,6 +3,7 @@ var quizCards = document.querySelector("#quiz-card")
 var quizQuestions = document.querySelector("#quiz-question")
 var quizInstructions = document.querySelector("#instructions")
 var quizButtons = document.querySelector("#button")
+var buttonsDiv = document.querySelector("#buttons-div")
 
 // array of quiz objects - question, answers, correct answer
 let quizArray = [
@@ -56,7 +57,7 @@ function changeQuizCards() {
         button.className = "button";
         var text = document.createTextNode(element);
         button.appendChild(text);
-        quizCards.appendChild(button);
+        buttonsDiv.appendChild(button);
     });
     quizInstructions.classList.add("hide");
     quizButtons.classList.add("hide");
