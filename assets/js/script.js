@@ -4,14 +4,14 @@ var quizQuestions = document.querySelector("#quiz-question")
 var quizInstructions = document.querySelector("#instructions")
 var quizButtons = document.querySelector("#button")
 var buttonsDiv = document.querySelector("#buttons-div")
-
+var index = 0;
 
 // array of quiz objects - question, answers, correct answer
 let quizArray = [
     {
         question: "How much is that doggy in the _________?",
         answer: ["1. cage", "2. window", "3. dog house", "4. backyard"],
-        correct: [1]
+        correct: ["2. window"]
     },
     {
         question: "Now I know my ABCs. Next time won't you _________ with me?",
@@ -38,22 +38,14 @@ let quizArray = [
 
 // function to start quiz
 function startQuiz() {
-    // replace "coding quiz challenge" with quiz question
-    quizQuestions.textContent = quizArray[0].question;
-
-    // generate quiz buttons
-    quizArray[0].answer.forEach(element => {
-        var button = document.createElement("button");
-        button.id = element;
-        button.className = "button";
-        var text = document.createTextNode(element);
-        button.appendChild(text);
-        buttonsDiv.appendChild(button);
-    });
-
     // hide quiz instructions and start button
     quizInstructions.classList.add("hide");
     quizButtons.classList.add("hide");
+    
+    // replace "coding quiz challenge" with quiz question
+    quizQuestions.textContent = quizArray[index].question;
+
+    
 
     // start timer
     quizTimer();
@@ -78,8 +70,21 @@ function quizTimer() {
 
 // function to increment quizArray question and buttons
 function nextQuestion() {
-
     console.log("quiz button click");
+    quizQuestions.textContent = quizArray[index].question;
+    one.textContent = quizArray[index].answer[0];
+    two.textContent = quizArray[index].answer[1];
+    three.textContent = quizArray[index].answer[2];
+    four.textContent = quizArray[index].answer[3];
+    if (quizArray[index].answer !== quizArray[index].correct) {
+
+    }
+    if (index < quizArray.length) {
+      index++;  
+    }
+    
+
+    
 };
 
 
