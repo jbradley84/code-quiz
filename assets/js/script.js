@@ -63,6 +63,12 @@ function changeQuizCards() {
     quizButtons.classList.add("hide");
 }
 
+// function to increment quizArray question and buttons
+function nextQuestion() {
+    console.log("quiz button click");
+}
+
+
 
 // function insertQuestions() {
 //     quizQuestions.textContent = quizArray[0].question;
@@ -91,8 +97,13 @@ function changeQuizCards() {
     //}
 //}
 
-// start quiz button event listener
+// START QUIZ button event listener
 document.getElementById("button").addEventListener("click", startQuiz);
+
+// QUIZ BUTTON event listener
+document.getElementById("buttons-div").addEventListener("click", nextQuestion);
+
+
 
 
 
