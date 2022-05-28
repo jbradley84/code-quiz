@@ -115,7 +115,6 @@ function nextQuestion() {
     }
 
     // quiz question array [num] is less than quiz question array.length, proceed to next question on click
-    console.log(quizArray.length);
     if (index < quizArray.length-1) {
         index++;
     } else if (index = 4) {
@@ -129,6 +128,7 @@ function nextQuestion() {
 function quizTimer() {
     // set start time to 75 seconds
     let timerStart = 75;
+
     // decrement timer by 1 second
     countDown = setInterval(function () {
         document.getElementById("timer").innerHTML = "Time: " + timerStart;
@@ -137,10 +137,14 @@ function quizTimer() {
         if (timerStart < 0) {
             clearInterval(countDown);
         }
-        // if(currentQuestion === quizQuestions.length -1) {
-        //     clearInterval(timer);
-        // }
     }, 1000);
+
+    // decrement timer by 10 seconds if answer incorrect
+    if (document.body.querySelector('.button[data-answer-value="false"]')) {
+    // if (nextQuestion.data-answer-value == "false") {
+         timerStart - 10000
+     }
+
 }
 
 
@@ -150,8 +154,7 @@ function displayResults() {
     quizCards.classList.add("hide");
 
     // assign score value to remaining time
-    quizScore.textContent = ("Your final score is " + document.getElementById("timer").innerHTML);
-    console.log(document.getElementById("timer"));
+    quizScore.textContent = ("Your final score is " + document.getElementById("timer").innerHTML.slice(6));
     // reveal quiz score results and form to input/record player initials
     quizFinished.classList.add("reveal");
     quizScore.classList.add("reveal");
@@ -162,6 +165,13 @@ function displayResults() {
 
 // function to view high scores
 function viewHighScores() {
+    // add player initials and score to localStorage
+    // localStorage.setItem("name", )
+    localStorage.setItem("score", JSON.stringify(document.getElementById("timer").innerHTML));
+
+    // display leaderboard
+
+
     // hide quiz greeting, instructions, and start button
     quizHeader.classList.add("hide");
     quizGreeting.classList.add("hide");
@@ -199,7 +209,7 @@ function quizGreeting() {
 
 
 // VIEW HIGH SCORES header event listener
-//document.getElementById("show-me-scores").addEventListener("click", viewHighScores);
+document.getElementById("show-me-scores").addEventListener("click", viewHighScores);
 
 // GO BACK BUTTON event listener
 document.getElementById("go-back").addEventListener("click", quizGreeting);
