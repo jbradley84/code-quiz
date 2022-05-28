@@ -43,6 +43,12 @@ let quizArray = [
         answer: ["1. lift", "2. give", "3. mess", "4. eat"],
         correct: "2. give"
     },
+    // Tim Gunn's "make it work" empty array object.
+    {
+        question: "",
+        answer: ["", "", "", ""],
+        correct: ""
+    },
 ];
 
 
@@ -115,9 +121,10 @@ function nextQuestion() {
     }
 
     // quiz question array [num] is less than quiz question array.length, proceed to next question on click
-    if (index < quizArray.length-1) {
+    if (index < quizArray.length - 1) {
         index++;
-    } else if (index = 4) {
+        console.log(quizArray.length);
+    } else if (index = 6) {
         displayResults();
         clearInterval(countDown);
     }
@@ -141,9 +148,9 @@ function quizTimer() {
 
     // decrement timer by 10 seconds if answer incorrect
     if (document.body.querySelector('.button[data-answer-value="false"]')) {
-    // if (nextQuestion.data-answer-value == "false") {
-         timerStart - 10000
-     }
+        // if (nextQuestion.data-answer-value == "false") {
+        timerStart - 10000
+    }
 
 }
 
@@ -165,9 +172,15 @@ function displayResults() {
 
 // function to view high scores
 function viewHighScores() {
-    // add player initials and score to localStorage
-    // localStorage.setItem("name", )
-    localStorage.setItem("score", JSON.stringify(document.getElementById("timer").innerHTML));
+    let inputInitials = document.getElementById("initials");
+    // combine player initials and score into an object
+    let = playerResults = {
+        playerInitials: inputInitials.value,
+        playerScore: document.getElementById("timer").innerHTML.slice(6)
+    }
+    // store player initials and score as object in localStorage
+    localStorage.setItem("playerResults", JSON.stringify(playerResults));
+
 
     // display leaderboard
 
