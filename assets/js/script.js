@@ -70,49 +70,54 @@ function startQuiz() {
 
 // function to increment quizArray question and buttons
 function nextQuestion() {
+    // set quiz questions to quiz questions array, question [0]
     quizQuestions.textContent = quizArray[index].question;
+
+    // set #one button to quiz questions array, answer [0]
     one.textContent = quizArray[index].answer[0];
-    console.log(quizArray[index].answer[0]);
-    console.log(quizArray[index].correct);
+    // assign data attribute of "true" to button if button text = correct answer
     if (one.textContent == quizArray[index].correct) {
         one.setAttribute("data-answer-value", "true");
     } else {
+        // assign data attribute of "false" to button if button text != correct answer
         one.setAttribute("data-answer-value", "false");
     }
+
+    // set #two button to quiz questions array, answer [1]
     two.textContent = quizArray[index].answer[1];
-    console.log(quizArray[index].answer[1]);
-    console.log(quizArray[index].correct);
+    // assign data attribute of "true" to button if button text = correct answer
     if (two.textContent == quizArray[index].correct) {
         two.setAttribute("data-answer-value", "true");
     } else {
+        // assign data attribute of "false" to button if button text != correct answer
         two.setAttribute("data-answer-value", "false");
     }
+
+    // set #three button to quiz questions array, answer [2]
     three.textContent = quizArray[index].answer[2];
-    console.log(quizArray[index].answer[2]);
-    console.log(quizArray[index].correct);
+    // assign data attribute of "true" to button if button text = correct answer
     if (three.textContent == quizArray[index].correct) {
         three.setAttribute("data-answer-value", "true");
     } else {
+        // assign data attribute of "false" to button if button text != correct answer
         three.setAttribute("data-answer-value", "false");
     }
+
+    // set #four button to quiz questions array, answer [3]
     four.textContent = quizArray[index].answer[3];
-    console.log(quizArray[index].answer[3]);
-    console.log(quizArray[index].correct);
+    // assign data attribute of "true" to button if button text = correct answer
     if (four.textContent == quizArray[index].correct) {
         four.setAttribute("data-answer-value", "true");
     } else {
+        // assign data attribute of "false" to button if button text != correct answer
         four.setAttribute("data-answer-value", "false");
     }
 
-
-    // if (quizArray[index].answer[index] === quizArray[index].correct) {
-    //     console.log("correct");
-    //     // } else {
-    //     //     console.log("correct");
-    // }
-    if (index < quizArray.length) {
+    // quiz question array [num] is less than quiz question array.length, proceed to next question on click
+    console.log(quizArray.length);
+    if (index < quizArray.length-1) {
         index++;
-    } else if (index = quizArray.length) {
+    } else if (index = 4) {
         displayResults();
     }
 
@@ -132,6 +137,9 @@ function quizTimer() {
         if (timerStart < 0) {
             clearInterval(countDown);
         }
+        // if(currentQuestion === quizQuestions.length -1) {
+        //     clearInterval(timer);
+        // }
     }, 1000);
 }
 
