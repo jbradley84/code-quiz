@@ -11,27 +11,27 @@ let quizArray = [
     {
         question: "How much is that doggy in the _________?",
         answer: ["1. cage", "2. window", "3. dog house", "4. backyard"],
-        correct: ["2. window"]
+        correct: "2. window"
     },
     {
         question: "Now I know my ABCs. Next time won't you _________ with me?",
         answer: ["1. rap", "2. play", "3. sing", "4. learn"],
-        correct: [2]
+        correct: "3. sing"
     },
     {
         question: "Supercalifragilisticexpiali_________.",
         answer: ["1. trocious", "2. bocious", "3. growsis", "4. docious"],
-        correct: [3]
+        correct: "4. docious"
     },
     {
         question: "The itsy-bitsy __________ went up the water spout.",
         answer: ["1. spider", "2. mouse", "3. caterpillar", "4. goldfish"],
-        correct: [0]
+        correct: "spider"
     },
     {
         question: "Never gonna _________ you up. Never gonna let you down.",
         answer: ["1. lift", "2. give", "3. mess", "4. eat"],
-        correct: [1]
+        correct: "give"
     },
 ];
 
@@ -41,51 +41,58 @@ function startQuiz() {
     // hide quiz instructions and start button
     quizInstructions.classList.add("hide");
     quizButtons.classList.add("hide");
-    
+
     // replace "coding quiz challenge" with quiz question
     quizQuestions.textContent = quizArray[index].question;
 
-    
-
-    // start timer
-    quizTimer();
+    // reveal quiz buttons
+    buttonsDiv.classList.add("buttons-div");
+    one.textContent = quizArray[index].answer[0];
+    two.textContent = quizArray[index].answer[1];
+    three.textContent = quizArray[index].answer[2];
+    four.textContent = quizArray[index].answer[3];
+    console.log(quizArray[index].correct);
 }
-
 
 // function to start timer
 function quizTimer() {
     // set start time to 75 seconds
-    let timerStart = 5;
+    let timerStart = 75;
     // decrement timer by 1 second
     let countDown = setInterval(function () {
         document.getElementById("timer").innerHTML = "Time: " + timerStart;
         timerStart--;
+        // if timer reaches 0, #timer = "Time: 0"
+        if (timerStart < 0) {
+            clearInterval(countDown);
+        }
     }, 1000);
-    // if timer reaches 0, #timer = "Time: 0"
-    if (countDown <= 0) {
-        clearInterval(countDown);
-    }
-}    
+}
+
+// start timer
+quizTimer();
 
 
 // function to increment quizArray question and buttons
 function nextQuestion() {
-    console.log("quiz button click");
     quizQuestions.textContent = quizArray[index].question;
     one.textContent = quizArray[index].answer[0];
     two.textContent = quizArray[index].answer[1];
     three.textContent = quizArray[index].answer[2];
     four.textContent = quizArray[index].answer[3];
-    if (quizArray[index].answer !== quizArray[index].correct) {
-
+    if (quizArray[index].answer[index] === quizArray[index].correct) {
+        console.log("correct");
+        // } else {
+        //     console.log("correct");
     }
     if (index < quizArray.length) {
-      index++;  
+        index++;
     }
-    
-
-    
 };
+
+
+
+
 
 
 // START QUIZ button event listener

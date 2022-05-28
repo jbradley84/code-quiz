@@ -91,3 +91,7 @@ section p {
 .hide {
     display: none;
 }
+
+.buttons-div {
+    display: block;
+}
