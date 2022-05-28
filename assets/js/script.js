@@ -14,6 +14,7 @@ var highScores = document.querySelector("#leaderboard")
 var mvpList = document.querySelector("mvp-list")
 var goBackBtn = document.querySelector("#go-back")
 var index = 0;
+var countDown;
 
 // array of quiz objects - question, answers, correct answer
 let quizArray = [
@@ -119,10 +120,9 @@ function nextQuestion() {
         index++;
     } else if (index = 4) {
         displayResults();
+        clearInterval(countDown);
     }
-
 }
-
 
 
 // function to start timer
@@ -130,7 +130,7 @@ function quizTimer() {
     // set start time to 75 seconds
     let timerStart = 75;
     // decrement timer by 1 second
-    let countDown = setInterval(function () {
+    countDown = setInterval(function () {
         document.getElementById("timer").innerHTML = "Time: " + timerStart;
         timerStart--;
         // if timer reaches 0, #timer = "Time: 0"
@@ -149,6 +149,9 @@ function displayResults() {
     // hide quiz questions, and quiz buttons
     quizCards.classList.add("hide");
 
+    // assign score value to remaining time
+    quizScore.textContent = ("Your final score is " + document.getElementById("timer").innerHTML);
+    console.log(document.getElementById("timer"));
     // reveal quiz score results and form to input/record player initials
     quizFinished.classList.add("reveal");
     quizScore.classList.add("reveal");
@@ -169,9 +172,14 @@ function viewHighScores() {
     quizQuestions.classList.add("hide");
     buttonsDiv.classList.add("hide");
 
+    // hide high scores 
+    quizFinished.classList.add("hide");
+    quizScore.classList.add("hide");
+    quizInitials.classList.add("hide");
+
     // reveal high scores card
     highScores.classList.add("reveal");
-    mvpList.classList.add("reveal");
+    //mvpList.classList.add("reveal");
     goBackBtn.classList.add("reveal");
 }
 
@@ -194,7 +202,7 @@ function quizGreeting() {
 //document.getElementById("show-me-scores").addEventListener("click", viewHighScores);
 
 // GO BACK BUTTON event listener
-//document.getElementById("go-back").addEventListener("click", quizGreeting);
+document.getElementById("go-back").addEventListener("click", quizGreeting);
 
 // START QUIZ BUTTON event listener
 document.getElementById("quiz-start-btn").addEventListener("click", startQuiz);
