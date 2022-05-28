@@ -1,7 +1,9 @@
 // document id types: quiz-box, header, timer, quiz-card, quiz-question, button
-var quizCards = document.querySelector("#quiz-card")
-var quizQuestions = document.querySelector("#quiz-question")
+var quizGreeting = document.querySelector("#quiz-greeting")
 var quizInstructions = document.querySelector("#instructions")
+var quizStartBtn = document.querySelector("#quiz-start-btn")
+var quizCards = document.querySelector("#quiz-card")
+var quizQuestions = document.querySelector("#questions-h2")
 var quizButtons = document.querySelector("#button")
 var buttonsDiv = document.querySelector("#buttons-div")
 var index = 0;
@@ -35,6 +37,9 @@ let quizArray = [
     },
 ];
 
+// assign initial value to hidden quiz question
+quizQuestions.textContent = quizArray[index].question;
+
 // assign initial values to hidden quiz buttons
 one.textContent = quizArray[index].answer[0];
 // if (quizArray[index].answer[0] == quizArray[index].correct) {
@@ -60,24 +65,43 @@ four.textContent = quizArray[index].answer[3];
 // } else {
 //     four.setAttribute("data-answer-value", "false");
 // }
-console.log(quizArray[index].correct);
 
 
 // function to start quiz
 function startQuiz() {
-    // hide quiz instructions and start button
-    quizInstructions.classList.add("hide");
-    quizButtons.classList.add("hide");
+    // hide quiz greeting, instructions, and start button
+    quizGreeting.classList.add("hide");
 
-    // replace "coding quiz challenge" with quiz question
-    quizQuestions.textContent = quizArray[index].question;
+    // reveal quiz question
+    quizQuestions.classList.add("reveal");
 
     // reveal quiz buttons
-    buttonsDiv.classList.add("buttons-div");
+    buttonsDiv.classList.add("reveal");
 
     // start timer
     quizTimer();
+
+    nextQuestion();
 }
+
+
+// function to increment quizArray question and buttons
+function nextQuestion() {
+    quizQuestions.textContent = quizArray[index].question;
+    one.textContent = quizArray[index].answer[0];
+    two.textContent = quizArray[index].answer[1];
+    three.textContent = quizArray[index].answer[2];
+    four.textContent = quizArray[index].answer[3];
+    // if (quizArray[index].answer[index] === quizArray[index].correct) {
+    //     console.log("correct");
+    //     // } else {
+    //     //     console.log("correct");
+    // }
+    if (index < quizArray.length) {
+        index++;
+    }
+}
+
 
 // function to start timer
 function quizTimer() {
@@ -95,29 +119,13 @@ function quizTimer() {
 }
 
 
-
-// function to increment quizArray question and buttons
-function nextQuestion() {
-    quizQuestions.textContent = quizArray[index].question;
-    one.textContent = quizArray[index].answer[0];
-    two.textContent = quizArray[index].answer[1];
-    three.textContent = quizArray[index].answer[2];
-    four.textContent = quizArray[index].answer[3];
-    console.log(event.target);
-    if (quizArray[index].answer[index] === quizArray[index].correct) {
-        console.log("correct");
-        // } else {
-        //     console.log("correct");
-    }
-    if (index < quizArray.length) {
-        index++;
-    }
-};
-
 // START QUIZ button event listener
-document.getElementById("button").addEventListener("click", startQuiz);
+document.getElementById("quiz-start-btn").addEventListener("click", startQuiz);
 
 // QUIZ BUTTON event listener
-document.getElementById("buttons-div").addEventListener("click", nextQuestion);
+document.getElementById("one").addEventListener("click", nextQuestion);
+document.getElementById("two").addEventListener("click", nextQuestion);
+document.getElementById("three").addEventListener("click", nextQuestion);
+document.getElementById("four").addEventListener("click", nextQuestion);
 
 

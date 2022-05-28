@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,22 +8,33 @@
     <title>Coding Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
     <div class="quiz-box" id="quiz-box">
+        <!-- high score header with timer -->
         <header class="header" id="header">
             <a href="#">View high scores</a>
             <p class="timer" id="timer">Time: 0</p>
         </header>
-        <section class="quiz-card" id="quiz-card">
-            <h2 class="quiz-question" id="quiz-question">
+
+        <!-- load page quiz greeting/instructions/start button -->
+        <section class="quiz-card" id="quiz-greeting">
+            <h2 class="quiz-h2">
                 Coding Quiz Challenge
             </h2>
-            <p id="instructions">
-                Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+            <p>
+                Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                answers will penalize your score/time by ten seconds!
             </p>
-            <button class="button" id="button" type="button">
+            <button class="button" id="quiz-start-btn" type="button">
                 Start Quiz
             </button>
+
+        </section>
+
+        <!-- hidden quiz card -->
+        <section class="quiz-card" id="reveal">
+            <h2 class="hide quiz-h2" id="questions-h2"></h2>
             <div class="hide" id="buttons-div">
                 <button class="button" id="one"></button>
                 <button class="button" id="two"></button>
@@ -30,8 +42,10 @@
                 <button class="button" id="four"></button>
             </div>
         </section>
+
     </div>
-    
+
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
