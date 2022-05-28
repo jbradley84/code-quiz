@@ -35,6 +35,33 @@ let quizArray = [
     },
 ];
 
+// assign initial values to hidden quiz buttons
+one.textContent = quizArray[index].answer[0];
+// if (quizArray[index].answer[0] == quizArray[index].correct) {
+//     one.setAttribute("data-answer-value", "true");
+// } else {
+//     one.setAttribute("data-answer-value", "false");
+// }
+two.textContent = quizArray[index].answer[1];
+// if (quizArray[index].answer[0] == quizArray[index].correct) {
+//     two.setAttribute("data-answer-value", "true");
+// } else {
+//     two.setAttribute("data-answer-value", "false");
+// }
+three.textContent = quizArray[index].answer[2];
+// if (quizArray[index].answer[0] == quizArray[index].correct) {
+//     three.setAttribute("data-answer-value", "true");
+// } else {
+//     three.setAttribute("data-answer-value", "false");
+// }
+four.textContent = quizArray[index].answer[3];
+// if (quizArray[index].answer[0] == quizArray[index].correct) {
+//     four.setAttribute("data-answer-value", "true");
+// } else {
+//     four.setAttribute("data-answer-value", "false");
+// }
+console.log(quizArray[index].correct);
+
 
 // function to start quiz
 function startQuiz() {
@@ -47,11 +74,9 @@ function startQuiz() {
 
     // reveal quiz buttons
     buttonsDiv.classList.add("buttons-div");
-    one.textContent = quizArray[index].answer[0];
-    two.textContent = quizArray[index].answer[1];
-    three.textContent = quizArray[index].answer[2];
-    four.textContent = quizArray[index].answer[3];
-    console.log(quizArray[index].correct);
+
+    // start timer
+    quizTimer();
 }
 
 // function to start timer
@@ -69,8 +94,6 @@ function quizTimer() {
     }, 1000);
 }
 
-// start timer
-quizTimer();
 
 
 // function to increment quizArray question and buttons
@@ -80,6 +103,7 @@ function nextQuestion() {
     two.textContent = quizArray[index].answer[1];
     three.textContent = quizArray[index].answer[2];
     four.textContent = quizArray[index].answer[3];
+    console.log(event.target);
     if (quizArray[index].answer[index] === quizArray[index].correct) {
         console.log("correct");
         // } else {
@@ -89,11 +113,6 @@ function nextQuestion() {
         index++;
     }
 };
-
-
-
-
-
 
 // START QUIZ button event listener
 document.getElementById("button").addEventListener("click", startQuiz);
