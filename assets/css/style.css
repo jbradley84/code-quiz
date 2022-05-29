@@ -88,6 +88,7 @@ section p {
     border-radius: 8px;
     padding: 10px;
     display: inline-block;
+    min-width: 7vw;
 }
 
 .button:hover {

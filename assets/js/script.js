@@ -1,42 +1,41 @@
 // document id types: quiz-box, header, timer, quiz-card, quiz-question, button
-var quizHeader = document.querySelector("#header")
 var quizGreeting = document.querySelector("#quiz-greeting")
 var quizInstructions = document.querySelector("#instructions")
 var quizStartBtn = document.querySelector("#quiz-start-btn")
 var quizQuestions = document.querySelector("#questions-h2")
-var quizButtons = document.querySelector("#button")
 var buttonsDiv = document.querySelector("#buttons-div")
 var quizCards = document.querySelector("#quiz-cards")
 var quizFinished = document.querySelector("#results-h2")
 var quizScore = document.querySelector("#final-score")
 var quizInitials = document.querySelector("#initials-input")
-var highScores = document.querySelector("#leaderboard")
-var mvpList = document.querySelector("mvp-list")
-var goBackBtn = document.querySelector("#go-back")
+var formEl = document.querySelector("initials")
 var index = 0;
 var countDown;
+var leaderboardData = [];
+var playerIdCounter = 0;
+
 
 // array of quiz objects - question, answers, correct answer
 let quizArray = [
     {
-        question: "How much is that doggy in the _________?",
-        answer: ["1. cage", "2. window", "3. dog house", "4. backyard"],
-        correct: "2. window"
+        question: "In JavaScript, array indexes start at what value?",
+        answer: ["1. 1", "2. 0", "3. one", "4. a"],
+        correct: "2. 0"
     },
     {
-        question: "Now I know my ABCs. Next time won't you _________ with me?",
-        answer: ["1. rap", "2. play", "3. sing", "4. learn"],
-        correct: "3. sing"
+        question: "Which of these is not an HTML event?",
+        answer: ["1. onclick", "2. onmouseover", "3. ondasher", "4. onload"],
+        correct: "3. ondasher"
     },
     {
-        question: "Supercalifragilisticexpiali_________.",
-        answer: ["1. trocious", "2. bocious", "3. growsis", "4. docious"],
-        correct: "4. docious"
+        question: "Boolean values are ________ values.",
+        answer: ["1. numeric", "2. scary", "3. skinny", "4. true/false"],
+        correct: "4. true/false"
     },
     {
-        question: "The itsy-bitsy __________ went up the water spout.",
-        answer: ["1. spider", "2. mouse", "3. caterpillar", "4. goldfish"],
-        correct: "1. spider"
+        question: "Which of these is not a coding language?",
+        answer: ["1. Klingon", "2. JavaScript", "3. CSS", "4. HTML"],
+        correct: "1. Klingon"
     },
     {
         question: "Never gonna _________ you up. Never gonna let you down.",
@@ -70,9 +69,7 @@ function startQuiz() {
 
     // proceed to next question when answering previous question
     nextQuestion();
-
-
-}
+};
 
 
 // function to increment quizArray question and buttons
@@ -123,12 +120,12 @@ function nextQuestion() {
     // quiz question array [num] is less than quiz question array.length, proceed to next question on click
     if (index < quizArray.length - 1) {
         index++;
-        console.log(quizArray.length);
+        // if quiz array index = 6 (Tim Gunn "make it work" empty array object), proceed to results 
     } else if (index = 6) {
         displayResults();
         clearInterval(countDown);
     }
-}
+};
 
 
 // function to start timer
@@ -151,8 +148,7 @@ function quizTimer() {
         // if (nextQuestion.data-answer-value == "false") {
         timerStart - 10000
     }
-
-}
+};
 
 
 // function to display quiz results quiz-h2 final-score score-input
@@ -162,70 +158,40 @@ function displayResults() {
 
     // assign score value to remaining time
     quizScore.textContent = ("Your final score is " + document.getElementById("timer").innerHTML.slice(6));
+
     // reveal quiz score results and form to input/record player initials
     quizFinished.classList.add("reveal");
     quizScore.classList.add("reveal");
     quizInitials.classList.add("reveal");
-
-}
+};
 
 
 // function to view high scores
-function viewHighScores() {
+function submitScore() {
+
     let inputInitials = document.getElementById("initials");
     // combine player initials and score into an object
-    let = playerResults = {
+    let playerResults = {
         playerInitials: inputInitials.value,
         playerScore: document.getElementById("timer").innerHTML.slice(6)
     }
-    // store player initials and score as object in localStorage
-    localStorage.setItem("playerResults", JSON.stringify(playerResults));
 
+    // assign playerId value
+    let playerId = playerIdCounter
 
-    // display leaderboard
+    // add player id to initials form input
+    playerResults.id = playerId;
 
+    // increment playerIdCounter
+    playerIdCounter++
 
-    // hide quiz greeting, instructions, and start button
-    quizHeader.classList.add("hide");
-    quizGreeting.classList.add("hide");
-    quizInstructions.classList.add("hide");
-    quizStartBtn.classList.add("hide");
+    // push playerResults object into leaderboardData array
+    leaderboardData.push(playerResults);
 
-    // hide quiz questions, and quiz buttons
-    quizQuestions.classList.add("hide");
-    buttonsDiv.classList.add("hide");
+    // store leaderboardData array in localStorage
+    localStorage.setItem("playerResults", JSON.stringify(leaderboardData));
+};
 
-    // hide high scores 
-    quizFinished.classList.add("hide");
-    quizScore.classList.add("hide");
-    quizInitials.classList.add("hide");
-
-    // reveal high scores card
-    highScores.classList.add("reveal");
-    //mvpList.classList.add("reveal");
-    goBackBtn.classList.add("reveal");
-}
-
-
-// function to return to quiz greeting when go back button is clicked
-function quizGreeting() {
-    // hide high scores card
-    quizFinished.classList.add("hide");
-    quizScore.classList.add("hide");
-    quizInitials.classList.add("hide");
-
-    // reveal quiz greetings
-    quizGreeting.classList.add("reveal");
-    quizInstructions.classList.add("reveal");
-    quizStartBtn.classList.add("reveal");
-}
-
-
-// VIEW HIGH SCORES header event listener
-document.getElementById("show-me-scores").addEventListener("click", viewHighScores);
-
-// GO BACK BUTTON event listener
-document.getElementById("go-back").addEventListener("click", quizGreeting);
 
 // START QUIZ BUTTON event listener
 document.getElementById("quiz-start-btn").addEventListener("click", startQuiz);
@@ -237,7 +203,8 @@ document.getElementById("three").addEventListener("click", nextQuestion);
 document.getElementById("four").addEventListener("click", nextQuestion);
 
 // ENTER INITIALS SUBMIT BUTTON event listener
-document.getElementById("initials-submit").addEventListener("click", viewHighScores);
+document.getElementById("initials-submit").addEventListener("click", submitScore);
+
 
 
 
